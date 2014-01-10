@@ -1,0 +1,170 @@
+--Configurable Options--
+local Slot_Ender_Fuel = 15 -- Slot the Enderchest with the Fuel is in
+local Slot_Ender_Cont = 16 -- Slot the Enderchest to controll the turtle is in
+local Slot_Ender_Res = 14  -- Slot the Enderchest for the Ressources is in
+local Slot_Chunk = 13      -- Slot the Chunkloaders are in
+local SlotsToCompare = 2   -- How many Slots the Turtle should compare (example: Slot 1 = Cobblestone, Slot 2 = Dirt, Slot 3 ...)
+local Slot_PA_Res_Start = 1 + SlotsToCompare -- At which Slot the Turtle should start to put Stuff away
+local Slot_PA_Res_Stop = 12                  -- At which Slot the Turtle should stop to put Stuff away
+
+--Functions--
+
+local function checkInvPlaceFree() -- Checks for free Place in the Inventory of the Turtle
+	if not turtle.getItemcount(12) > 0 and not turtle.getItemCount(11) > 0 then
+		return true
+	else
+		return false
+	end
+end
+
+local function shouldMine() -- Checks if the Turtle should mine the Block in front of it
+	for i=1,SlotsToCompare do
+		turtle.select(i)
+		if turtle.compare() then
+			return false
+		end
+	end
+	rtuen true
+end
+
+local function putMatAway() -- Puts all the Materials in the Enderchest
+	while turtle.detectUp() do
+		turtle.digUp()
+		sleep(1)
+	end
+	turtle.select(Slot_Ender_Res)
+	turtle.placeUp()
+	for i=Slot_PA_Res_Start,Slot_PA_Res_Stop do
+		turtle.select(i)
+		if turtle.getItemCount(i) > 0 then
+			while not turtle.dropUp() do
+				sleep(5)
+			end
+		end
+	end
+	turtle.select(Slot_Ender_Res)
+	turtle.digUp()
+end
+
+local function doTurn() -- Checks all 4 directins (North,South,East,West) for Materials
+	for i=1,4 do 
+		turtle.turnRight()
+		if shouldMine() then
+			turtle.dig()
+		end
+	end
+	if checkInvPlaceFree() then
+		putMatAway()
+	end
+end
+
+local function checkforBed() -- Checks if the Turtle reached Bedrock
+	if turtle.detectDown() and not Turtle.digDown() then
+		return true
+	else
+		return false
+	end
+end
+
+local function getFuel() -- Refuels the Turtle
+	turtle.select(Slot_Ender_Fuel)
+	while turtle.detectUp() do
+		turtle.digUp()
+		sleep(1)
+	end
+	turtle.placeUp()
+	turtle.suckUp()
+	turtle.refuel()
+	turtle.dropUp()
+	turtle.select(Slot_Ender_Fuel)
+	turtle.digUp()
+end
+
+local function dig() -- Digs the Shaft and brings the Turtle back up
+	local down = 0
+	while not checkForBed() do
+		doTurn()
+		turtle.digDown()
+		turtle.down()
+		down = down + 1
+	end
+	getFuel()
+	for i=1,down do
+		while turtle.detectUp() do
+			turtle.digUp()
+			sleep(1)
+		end
+		turtle.up()
+	end
+	putMatAway()
+end
+
+local function digWay() -- Digs everything that is in the turtles way
+	while turtle.detect() do
+		turtle.dig()
+		sleep(1)
+	end
+end
+
+local function goNext() -- Moves Chunkloader and goes to the next place
+	getFuel()
+	digWay()
+	turtle.forward()
+	digWay()
+	turtle.forward()
+	turtle.turnRight()
+	digWay()
+	turtle.forward()
+	turtle.turnLeft()
+	turtle.up()
+	turtle.turnLeft()
+	digWay()
+	turtle.select(Slot_Chunk)
+	turtle.place()
+	turtle.down()
+	turtle.forward()
+	turtle.turnRight()
+	turtle.back()
+	turtle.back()
+	turtle.turnLeft()
+	turtle.up()
+	turtle.select(Slot_Chunk)
+	turtle.dig()
+	turtle.down()
+	turtle.turnRight()
+	turtle.forward()
+	turtle.forward()
+	turtle.turnRight()
+	turtle.forward()
+	turtle.turnLeft()
+end
+
+local function checkOrder() -- Checks for Orders
+	while turtle.detectUp() do
+		turtle.digUp()
+		sleep(1)
+	end
+	turtle.select(Slot_Ender_Cont)
+	turtle.placeUp()
+	local p = peripheral.warp("top")
+	while true do
+		if p.getAllStacks() > 0 then
+			turtle.select(Slot_Ender_Cont)
+			turtle.digUp()
+			return
+		else
+			sleep(5)
+		end
+	end
+end
+
+function run() -- Runns the Cycle
+	while true do
+		checkOrder()
+		getFuel()
+		dig()
+		goNext()
+	end
+end
+
+run()

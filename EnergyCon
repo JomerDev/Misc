@@ -20,11 +20,11 @@ local Dynamos = {
 }
 -- Energy Cells --
 local ECells = {
-	TE_Cell_1 = {name = "cofh_thermalexpansion_energycell_2",monTop = nil,mon_bot = Mon_Cell_1},        -- The first Energy Cell
+	TE_Cell_5 = {name = "cofh_thermalexpansion_energycell_2",monTop = nil,mon_bot = Mon_Cell_1},        -- The first Energy Cell 
 	TE_Cell_2 = {name = "cofh_thermalexpansion_energycell_3",monTop = Mon_Cell_1,mon_bot = Mon_Cell_2}, -- The second Energy Cell
 	TE_Cell_3 = {name = "cofh_thermalexpansion_energycell_4",monTop = Mon_Cell_2,mon_bot = Mon_Cell_3}, -- The third Energy Cell
 	TE_Cell_4 = {name = "cofh_thermalexpansion_energycell_5",monTop = Mon_Cell_3,mon_bot = nil},         -- The forth Energy Cell
-	TE_Cell_5 = {name = "tile_thermalexpansion_dynamo_magmatic_name_0",posx = 0, posy = 0, state = false,mon = MonMain}
+	TE_Cell_1 = {name = "cofh_thermalexpansion_energycell_5",monTop = Mon_Cell_3, monBot = nil}
 }
 
 -- Functions --

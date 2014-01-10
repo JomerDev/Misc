@@ -8,7 +8,7 @@ local Monitors = {
 	Mon_Side_1 = "monitor_5", -- The Name of the first Monitor on the side
 	Mon_Side_2 = "monitor_4"  -- The Name of the second Monitor on the side
 }
--- Magmatic Dynamos--
+-- Magmatic Dynamos --
 local Dynamos = {
 	TE_Dyn_Mag_1 = {name = "tile_thermalexpansion_dynamo_magmatic_name_0",posx = 0, posy = 0, state = false,mon = MonMain}, -- The first Magmatic Dynamo
 	TE_Dyn_Mag_2 = {name = "tile_thermalexpansion_dynamo_magmatic_name_1",posx = 0, posy = 0, state = false,mon = MonMain}, -- The second Magmatic Dynamo
@@ -20,10 +20,11 @@ local Dynamos = {
 }
 -- Energy Cells --
 local ECells = {
-	TE_Cell_1 = {name = "cofh_thermalexpansion_energycell_2",mon_top = nil,mon_bot = Mon_Cell_1},        -- The first Energy Cell
-	TE_Cell_2 = {name = "cofh_thermalexpansion_energycell_3",mon_top = Mon_Cell_1,mon_bot = Mon_Cell_2}, -- The second Energy Cell
-	TE_Cell_3 = {name = "cofh_thermalexpansion_energycell_4",mon_top = Mon_Cell_2,mon_bot = Mon_Cell_3}, -- The third Energy Cell
-	TE_Cell_4 = {name = "cofh_thermalexpansion_energycell_5",mon_top = Mon_Cell_3,mon_bot = nil}         -- The forth Energy Cell
+	TE_Cell_1 = {name = "cofh_thermalexpansion_energycell_2",monTop = nil,mon_bot = Mon_Cell_1},        -- The first Energy Cell
+	TE_Cell_2 = {name = "cofh_thermalexpansion_energycell_3",monTop = Mon_Cell_1,mon_bot = Mon_Cell_2}, -- The second Energy Cell
+	TE_Cell_3 = {name = "cofh_thermalexpansion_energycell_4",monTop = Mon_Cell_2,mon_bot = Mon_Cell_3}, -- The third Energy Cell
+	TE_Cell_4 = {name = "cofh_thermalexpansion_energycell_5",monTop = Mon_Cell_3,mon_bot = nil},         -- The forth Energy Cell
+	TE_Cell_5 = {name = "tile_thermalexpansion_dynamo_magmatic_name_0",posx = 0, posy = 0, state = false,mon = MonMain}
 }
 
 -- Functions --
@@ -31,7 +32,7 @@ local ECells = {
 local start = function()
 	for i,v in pairs(ECells) do
 		v["wrap"] = peripheral.wrap(v.name)
-		for k,x in pairs(v) do print(tostring(k).." : "..tostring(x)) end
+		for k,x in pairs(v) do print(tostring(k).." : "..tostring(x)) sleep(3) end
 	end
 	for i,v in pairs(Dynamos) do
 		v["wrap"] = peripheral.wrap(v.name)
@@ -41,3 +42,5 @@ local start = function()
 		v = peripheral.wrap(tostring(v))
 	end
 end
+
+start()

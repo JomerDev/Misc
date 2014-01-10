@@ -10,7 +10,7 @@ local Slot_PA_Res_Stop = 12                  -- At which Slot the Turtle should 
 --Functions--
 
 local function checkInvPlaceFree() -- Checks for free Place in the Inventory of the Turtle
-	if not turtle.getItemcount(12) > 0 and not turtle.getItemCount(11) > 0 then
+	if turtle.getItemCount(12) > 0 and turtle.getItemCount(11) > 0 then
 		return true
 	else
 		return false
@@ -24,7 +24,7 @@ local function shouldMine() -- Checks if the Turtle should mine the Block in fro
 			return false
 		end
 	end
-	rtuen true
+	return true
 end
 
 local function putMatAway() -- Puts all the Materials in the Enderchest
@@ -58,11 +58,11 @@ local function doTurn() -- Checks all 4 directins (North,South,East,West) for Ma
 	end
 end
 
-local function checkforBed() -- Checks if the Turtle reached Bedrock
-	if turtle.detectDown() and not Turtle.digDown() then
-		return true
-	else
+local function checkForBed() -- Checks if the Turtle reached Bedrock
+	if turtle.detectDown() and not turtle.digDown() then
 		return false
+	else
+		return true
 	end
 end
 
@@ -82,7 +82,7 @@ end
 
 local function dig() -- Digs the Shaft and brings the Turtle back up
 	local down = 0
-	while not checkForBed() do
+	while checkForBed() do
 		doTurn()
 		turtle.digDown()
 		turtle.down()
@@ -146,9 +146,9 @@ local function checkOrder() -- Checks for Orders
 	end
 	turtle.select(Slot_Ender_Cont)
 	turtle.placeUp()
-	local p = peripheral.warp("top")
+	local p = peripheral.wrap("top")
 	while true do
-		if p.getAllStacks() > 0 then
+		if #p.getAllStacks() > 0 then
 			turtle.select(Slot_Ender_Cont)
 			turtle.digUp()
 			return

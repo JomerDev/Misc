@@ -1,0 +1,27 @@
+-- Config Area -- 
+-- Monitors --
+local Monitors = {
+Mon_Main = "monitor_"   -- The Name of the Main monitor
+Mon_Cell_1 = "monitor_", -- The Name of the Monitor between the first and the second cell
+Mon_Cell_2 = "monitor_", -- The Name of the Monitor between the second and the third cell
+Mon_Cell_3 = "monitor_", -- The Name of the Monitor between the third and the forth cell
+Mon_Side_1 = "monitor_", -- The Name of the first Monitor on the side
+Mon_Side_2 = "monitor_" -- The Name of the second Monitor on the side
+}
+-- Magmatic Dynamos--
+local Dynamos = {
+TE_Dyn_Mag_1 = {name = "tile_thermalexpansion_dynamo_magmatic_name_0",posx = 0, posy = 0, state = false,mon = MonMain}, -- The first Magmatic Dynamo
+TE_Dyn_Mag_2 = {name = "tile_thermalexpansion_dynamo_magmatic_name_1",posx = 0, posy = 0, state = false,mon = MonMain}, -- The second Magmatic Dynamo
+TE_Dyn_Mag_3 = {name = "tile_thermalexpansion_dynamo_magmatic_name_2",posx = 0, poxy = 0, state = false,mon = MonMain}, -- The third Magmatic Dynamo
+TE_Dyn_Mag_4 = {name = "tile_thermalexpansion_dynamo_magmatic_name_3",posx = 0, poxy = 0, state = false,mon = MonMain}, -- The forth Magmatic Dynamo
+TE_Dyn_Mag_5 = {name = "tile_thermalexpansion_dynamo_magmatic_name_4",posx = 0, poxy = 0, state = false,mon = MonMain}, -- The fifth Magmatic Dynamo
+TE_Dyn_Mag_6 = {name = "tile_thermalexpansion_dynamo_magmatic_name_5",posx = 0, poxy = 0, state = false,mon = MonMain}, -- The sixth Magmatic Dynamo
+TE_Dyn_Mag_7 = {name = "tile_thermalexpansion_dynamo_magmatic_name_6",posx = 0, poxy = 0, state = false,mon = MonMain}  -- The seventh Magmatic Dynamo
+}
+-- Energy Cells --
+local TE_Cell_1 = "cofh_thermalexpansion_energycell_2" -- The first Energy Cell
+local TE_Cell_2 = "cofh_thermalexpansion_energycell_3" -- The second Energy Cell
+local TE_Cell_3 = "cofh_thermalexpansion_energycell_4" -- The third Energy Cell
+local TE_Cell_4 = "cofh_thermalexpansion_energycell_5" -- The forth Energy Cell
+
+-- Functions --

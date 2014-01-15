@@ -40,7 +40,7 @@ local start = function()
 	end
 end
 
-local checkCells()
+local function checkCells()
 	local amount = 0
 	for i,v in pairs(ECells) do
 		if peripheral.isPresent(v[name]) then
